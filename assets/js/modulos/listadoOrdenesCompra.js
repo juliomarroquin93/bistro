@@ -1,0 +1,123 @@
+// JS para la vista listado de órdenes de compra
+// Puedes agregar aquí funciones para filtros, búsqueda, acciones, etc.
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar DataTable si está disponible en la plantilla
+    if (window.jQuery && $.fn.DataTable) {
+        var $tabla = $('.table');
+        if ( $.fn.DataTable.isDataTable($tabla) ) {
+            $tabla.DataTable().destroy();
+        }
+        $tabla.DataTable({
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50, 100],
+            language: {
+                url: base_url + 'assets/js/espanol.json'
+            }
+        });
+    }
+
+    // Código JS futuro para la vista listado
+    function compra(idOrden) {
+        localStorage.removeItem('posVenta2');
+        let listaCarrito = [];
+        const url = base_url + 'ordenesCompra/editar/' + idOrden;
+        const http = new XMLHttpRequest();
+        http.open('GET', url, true);
+        http.send();
+        http.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                const productos = JSON.parse(res.productos);
+                const id_proveedor = res.id_proveedor;
+                // Aquí puedes setear datos de proveedor, etc. si lo necesitas
+                for (let i = 0; i < productos.length; i++) {
+                    listaCarrito.push({
+                        id: productos[i].id,
+                        cantidad: productos[i].cantidad,
+                        precio: productos[i].precio,
+                        descripcion: productos[i].nombre || productos[i].descripcion || '',
+                        catalogo: "Normal"
+                    });
+                }
+                localStorage.setItem('posVenta2', JSON.stringify(listaCarrito));
+                if (listaCarrito.length > 0) {
+                    window.location.href = base_url + 'ventas2/comprasCotizacion/'+idOrden+'/'+id_proveedor;
+                }
+            }
+        }
+    }
+    
+    // Si quieres asociar el botón aquí, puedes hacerlo así:
+    document.querySelectorAll('.btnCompletarCompra').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const idOrden = btn.getAttribute('data-id');
+            compra(idOrden);
+        });
+    });
+
+    document.querySelectorAll('.btnAutorizarOrden').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var id = btn.getAttribute('data-id');
+            window.location.href = base_url + 'ordenesCompra/detalle/' + id;
+        });
+    });
+
+    var btnAutorizarDetalle = document.getElementById('btnAutorizarDetalleOrden');
+    if (btnAutorizarDetalle) {
+        btnAutorizarDetalle.addEventListener('click', function() {
+            var id = btnAutorizarDetalle.getAttribute('data-id');
+            if (!id) return;
+            if (!confirm('¿Está seguro que desea autorizar esta orden de compra?')) return;
+            var url = base_url + 'ordenesCompra/autorizar';
+            var http = new XMLHttpRequest();
+            http.open('POST', url, true);
+            http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    try {
+                        var res = JSON.parse(this.responseText);
+                        if (res.success) {
+                            alert('Orden autorizada correctamente.');
+                            window.location.reload();
+                        } else {
+                            alert('Error al autorizar la orden.');
+                        }
+                    } catch (e) {
+                        alert('Error en la respuesta del servidor.');
+                    }
+                }
+            };
+            http.send('id=' + encodeURIComponent(id) + '&estado=aprobado');
+        });
+    }
+
+    var btnRechazarDetalle = document.getElementById('btnRechazarDetalleOrden');
+    if (btnRechazarDetalle) {
+        btnRechazarDetalle.addEventListener('click', function() {
+            var id = btnRechazarDetalle.getAttribute('data-id');
+            if (!id) return;
+            if (!confirm('¿Está seguro que desea rechazar esta orden de compra?')) return;
+            var url = base_url + 'ordenesCompra/autorizar';
+            var http = new XMLHttpRequest();
+            http.open('POST', url, true);
+            http.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    try {
+                        var res = JSON.parse(this.responseText);
+                        if (res.success) {
+                            alert('Orden rechazada correctamente.');
+                            window.location.reload();
+                        } else {
+                            alert('Error al rechazar la orden.');
+                        }
+                    } catch (e) {
+                        alert('Error en la respuesta del servidor.');
+                    }
+                }
+            };
+            http.send('id=' + encodeURIComponent(id) + '&estado=rechazado');
+        });
+    }
+});

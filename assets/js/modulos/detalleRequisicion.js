@@ -1,0 +1,31 @@
+// JS para la vista detalle de requisición
+// Redirecciona a la lista de requisiciones y a cotización
+// JS para la vista detalle de requisición
+// Redirecciona a la lista de requisiciones y a cotización
+document.addEventListener('DOMContentLoaded', function() {
+    const btnComparar = document.getElementById('btnCompararCotizaciones');
+        btnComparar.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = btnComparar.getAttribute('data-id');
+            window.location.href = base_url + 'requisiciones/comparativoCotizaciones/' + encodeURIComponent(id);
+        });
+    const btnVolver = document.getElementById('btnVolverRequisiciones');
+        btnVolver.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = base_url + 'requisiciones';
+        });
+    
+    const btnCotizar = document.getElementById('btnCotizarRequisicion');
+        btnCotizar.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = btnCotizar.getAttribute('data-id');
+            window.location.href = base_url+'requisiciones/cotizacion/' + encodeURIComponent(id);
+        });
+
+    document.querySelectorAll('.btnVerCotizacion').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var idCot = btn.getAttribute('data-id');
+            window.location.href = base_url + 'requisiciones/verCotizacion/' + idCot;
+        });
+    });
+});
