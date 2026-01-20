@@ -12,6 +12,7 @@ define('USER_SMTP', 'carlos.fabian@fabianscorp.top');
 define('CLAVE_SMTP', 'Gatoperro16$');
 define('PUERTO_SMTP', 465);
 define('nit','02100903931053');
+define('nit','02100903931053');
 
 // Configuraciones Facturacion Electronica
 
