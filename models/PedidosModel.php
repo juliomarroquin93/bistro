@@ -3,8 +3,8 @@ class PedidosModel extends Query{
             // Obtener subpedido por id
             public function getSubpedido($idSubpedido)
             {
-                $sql = "SELECT * FROM subpedidos WHERE id = ?";
-                return $this->select($sql, [$idSubpedido]);
+                $sql = "SELECT * FROM subpedidos WHERE id = $idSubpedido";
+                return $this->select($sql);
             }
         // Guardar subpedido como registro aparte
         public function guardarSubpedido($idPedidoPadre, $productos, $total, $fecha, $hora, $idUsuario)

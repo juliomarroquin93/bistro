@@ -18,7 +18,11 @@ class Pedidos extends Controller
         $data['title'] = 'Subpedido';
         $data['empresa'] = $this->model->getEmpresa();
         $data['subpedido'] = $this->model->getSubpedido($idSubpedido);
-        $data['cliente'] = $this->model->getCliente($data['subpedido']['id_usuario']); // Ajustar si se requiere otro dato
+        // Obtener el cliente real desde el pedido padre
+        $idPedidoPadre = $data['subpedido']['id_pedido_padre'];
+        $pedidoPadre = $this->model->getCotizacion($idPedidoPadre); // getCotizacion trae el pedido por id
+        $idCliente = isset($pedidoPadre['id_cliente']) ? $pedidoPadre['id_cliente'] : null;
+        $data['cliente'] = $idCliente ? $this->model->getCliente($idCliente) : null;
         $data['idSubpedido'] = $idSubpedido;
         $this->views->getView('pedidos', 'tickedSubpedido', $data);
         $html = ob_get_clean();
