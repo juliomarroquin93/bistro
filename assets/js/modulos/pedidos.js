@@ -365,7 +365,8 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 function subpedido(id){
-	 window.location.href = base_url + 'pedidos/subpedido/' + id;
+	// window.location.href = base_url + 'pedidos/subpedido/' + id;
+	alert('PRueba');
 }
 
 function generarPlan(){
