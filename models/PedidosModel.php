@@ -16,8 +16,8 @@ class PedidosModel extends Query{
 
             // Sumar productos al detalle del pedido original
             // Obtener productos actuales del pedido padre
-            $sqlPadre = "SELECT productos FROM pedidos WHERE id = ?";
-            $row = $this->select($sqlPadre, [$idPedidoPadre]);
+            $sqlPadre = "SELECT productos FROM pedidos WHERE id = $idPedidoPadre ";
+            $row = $this->select($sqlPadre);
             $productosPadre = [];
             if ($row && isset($row['productos'])) {
                 $productosPadre = json_decode($row['productos'], true);
@@ -39,7 +39,8 @@ class PedidosModel extends Query{
             }
             $productosActualizados = json_encode($productosPadre);
             $sqlUpdate = "UPDATE pedidos SET productos = ? WHERE id = ?";
-            $this->save($sqlUpdate, [$productosActualizados, $idPedidoPadre]);
+            $array = array($productosActualizados, $idPedidoPadre);
+            $this->save($sqlUpdate, $array);
 
             return $idSubpedido;
         }
