@@ -56,68 +56,7 @@
             </div>
         </nav>
         <div class="container mt-4">
-                        <li> <a href="<?php echo BASE_URL . 'productos'; ?>"><i class="bx bx-right-arrow-alt"></i>Productos</a>
-                        </li>
-						<?php } if (verificar('bodegas')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'bodegas'; ?>"><i class="bx bx-right-arrow-alt"></i>Bodegas</a>
-                        </li>
-						<?php } if (verificar('contingencias')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'contingencias'; ?>"><i class="bx bx-right-arrow-alt"></i>Contingencias</a>
-                        </li>
-                        <?php }if (verificar('tasaMora') || verificar('medidas') || verificar('categorias') || verificar('productos') || verificar('bodegas')|| verificar('contingencias')) { ?>
-                    </ul>
-                </li>
-                <?php } ?>
-                
-                <!--FIN DESDE AQUI PUSE EL CODIGO DE NUEVO SI ES NECESARIO QUITARLO LO QUITAS PARA NO INTERFERIR CON TU PROGRAMACION SI ESTA BIEN DEJARLO-->
-                
-                
-                <?php  if (verificar('tipoProducto')) { ?>
-                <li>
-                    <a href="<?php echo BASE_URL . 'tipoProducto'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-boxes-stacked"></i>
-                        </div>
-                        <div class="menu-title">Tipo de Producto</div>
-                    </a>
-                </li>
-                
-                <?php }  if (verificar('clientes')) { ?>
-                <li>
-                    <a href="<?php echo BASE_URL . 'clientes'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-people-group"></i>
-                        </div>
-                        <div class="menu-title">Clientes</div>
-                    </a>
-                </li>
-                
-                <?php }  if (verificar('proveedores')) { ?>
-                <li>
-                    <a href="<?php echo BASE_URL . 'clientes2'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-people-carry-box"></i>
-                        </div>
-                        <div class="menu-title">Proveedores</div>
-                    </a>
-                </li>
-
-
-                <?php }  if (verificar('cajas')) { ?>
-                <li>
-                    <a href="<?php echo BASE_URL . 'cajas'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-box-open"></i>
-                        </div>
-                        <div class="menu-title">Cajas</div>
-                    </a>
-                </li> 
-				
-                <?php } if (verificar('salidas') ) { ?>
-                    <li>
-                        <a href="javascript:;" class="has-arrow">
-                            <div class="parent-icon"><i class="fa-solid fa-arrow-right-arrow-left"></i>
-                            </div>
-                            <div class="menu-title">Traslados</div>
-                        </a>
-                        <ul>
-                            <?php } if (verificar('salidas')) { ?>
+    <!-- Aquí continúa el contenido de la página principal -->
                             <li> <a href="<?php echo BASE_URL . 'salidas'; ?>"><i class="bx bx-right-arrow-alt"></i>Movimientos</a>
                             </li>
                         </ul>
