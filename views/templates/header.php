@@ -7,25 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--favicon-->
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo BASE_URL; ?>assets/images/favicon.ico">
-    <link href="<?php echo BASE_URL; ?>assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
-    <link href="<?php echo BASE_URL; ?>assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
-    <link href="<?php echo BASE_URL; ?>assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
-    <!-- loader-->
-    <link href="<?php echo BASE_URL; ?>assets/css/pace.min.css" rel="stylesheet" />
-    <script src="<?php echo BASE_URL; ?>assets/js/pace.min.js"></script>
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/jquery-ui.min.css">
-    <!-- Bootstrap CSS -->
-    <link href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/css/bootstrap-extended.css" rel="stylesheet">
+    <!-- Bootstrap 5 Modern -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/css/app.css" rel="stylesheet">
-    <link href="<?php echo BASE_URL; ?>assets/css/icons.css" rel="stylesheet">
-    <!-- Theme Style CSS -->
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/dark-theme.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/semi-dark.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/header-colors.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/DataTables/datatables.min.css" />
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/plugins/fullcalendar/css/main.min.css" />
 
     <title><?php echo TITLE . ' - ' . $data['title']; ?></title>
 </head>
@@ -361,25 +346,42 @@
                                 $perfil = BASE_URL . $_SESSION['perfil_usuario'];
                             } ?>
                             <img src="<?php echo $perfil; ?>" class="user-img" alt="user avatar">
-                            <div class="user-info ps-3">
-                                <p class="user-name mb-0"><?php echo $_SESSION['nombre_usuario']; ?></p>
-                                <p class="designattion mb-0"><?php echo $_SESSION['correo_usuario']; ?></p>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="<?php echo BASE_URL . 'usuarios/profile'; ?>"><i class="bx bx-user"></i><span>Profile</span></a>
-                            </li>
-                            <li>
-                                <div class="dropdown-divider mb-0"></div>
-                            </li>
-                            <li><a class="dropdown-item" href="<?php echo BASE_URL . 'usuarios/salir'; ?>"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </header>
-        <!--end header -->
-        <!--start page wrapper -->
-        <div class="page-wrapper">
-            <div class="page-content">
+                            <!-- Menú Bootstrap Moderno -->
+                            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                                <div class="container-fluid">
+                                    <a class="navbar-brand" href="#">Bistro</a>
+                                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse" id="navbarNav">
+                                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" aria-current="page" href="<?php echo BASE_URL; ?>admin">Inicio</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="<?php echo BASE_URL; ?>pedidos">Pedidos</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="<?php echo BASE_URL; ?>clientes">Clientes</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="<?php echo BASE_URL; ?>productos">Productos</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <img src="<?php echo isset($_SESSION['perfil_usuario']) && $_SESSION['perfil_usuario'] ? BASE_URL . $_SESSION['perfil_usuario'] : BASE_URL . 'assets/images/logo.png'; ?>" class="rounded-circle" width="30" height="30" alt="user avatar">
+                                                    <?php echo $_SESSION['nombre_usuario']; ?>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                                    <li><a class="dropdown-item" href="<?php echo BASE_URL . 'usuarios/profile'; ?>">Perfil</a></li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li><a class="dropdown-item" href="<?php echo BASE_URL . 'usuarios/salir'; ?>">Salir</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                            <div class="container mt-4">
