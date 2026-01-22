@@ -74,21 +74,26 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         const total = productosSubpedido.reduce((acc, prod) => acc + (prod.precio * prod.cantidad), 0);
-        fetch('controllers/Pedidos.php?method=guardarSubpedido', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ idPedidoPadre, productos: productosSubpedido, total })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.type === 'success') {
-                alert('Subpedido guardado correctamente');
-                mostrarBotonImprimir(data.idSubpedido);
-            } else {
-                alert('Error al guardar subpedido');
+        const url = base_url + 'pedidos/guardarSubpedido';
+        const http = new XMLHttpRequest();
+        http.open('POST', url, true);
+        http.setRequestHeader('Content-Type', 'application/json');
+        http.send(JSON.stringify({ idPedidoPadre, productos: productosSubpedido, total }));
+        http.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    const data = JSON.parse(this.responseText);
+                    if (data.type === 'success') {
+                        alert('Subpedido guardado correctamente');
+                        mostrarBotonImprimir(data.idSubpedido);
+                    } else {
+                        alert('Error al guardar subpedido');
+                    }
+                } else {
+                    alert('Error de conexión');
+                }
             }
-        })
-        .catch(() => alert('Error de conexión'));
+        };
     });
 });
 
