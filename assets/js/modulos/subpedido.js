@@ -1,3 +1,30 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Alternar inputs de búsqueda
+    document.getElementById('nombre').addEventListener('click', function () {
+        document.getElementById('containerCodigo').classList.add('d-none');
+        document.getElementById('containerNombre').classList.remove('d-none');
+        document.getElementById('containerGasto').classList.add('d-none');
+        document.getElementById('buscarProductoNombre').value = '';
+        document.getElementById('errorBusqueda').textContent = '';
+        document.getElementById('buscarProductoNombre').focus();
+    });
+    document.getElementById('barcode').addEventListener('click', function () {
+        document.getElementById('containerNombre').classList.add('d-none');
+        document.getElementById('containerCodigo').classList.remove('d-none');
+        document.getElementById('containerGasto').classList.add('d-none');
+        document.getElementById('buscarProductoCodigo').value = '';
+        document.getElementById('errorBusqueda').textContent = '';
+        document.getElementById('buscarProductoCodigo').focus();
+    });
+    document.getElementById('gasto').addEventListener('click', function () {
+        document.getElementById('containerNombre').classList.add('d-none');
+        document.getElementById('containerCodigo').classList.add('d-none');
+        document.getElementById('containerGasto').classList.remove('d-none');
+        document.getElementById('buscarGasto').value = '';
+        document.getElementById('errorBusqueda').textContent = '';
+        document.getElementById('buscarGasto').focus();
+    });
+    // ...existing code...
 // Redirección desde el botón de la tabla de pedidos
 // subpedido.js
 let productosSubpedido = [];
