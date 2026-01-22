@@ -297,7 +297,7 @@ $this->views->getView('ventas', 'exportacion', $data);
                     <a class="btn btn-warning" href="#" onclick="anularPedido(' . $data[$i]['id'] . ')"><i class="fas fa-trash"></i></a>
                     <a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
                     <a class="btn btn-warning" href="#" onclick="detalle(' . $data[$i]['id'] . ')"><i class="fas fa-file-edit"></i></a>
-                    <a class="btn btn-info btn-subpedido" href="#" data-id="' . $data[$i]['id'] . '" title="Agregar Subpedido"><i class="fas fa-plus"></i> Subpedido</a>
+                    <a class="btn btn-info btn-subpedido" href="#"  onclick="subpedido(' . $data[$i]['id'] . ')"><i class="fas fa-plus"></i> Subpedido</a>
                     </div>';  
 				}
             } else {
