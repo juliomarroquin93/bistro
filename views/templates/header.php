@@ -1,23 +1,15 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--favicon-->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo BASE_URL; ?>assets/images/favicon.ico">
-    <!-- Bootstrap 5 Modern -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-
-    <title><?php echo TITLE . ' - ' . $data['title']; ?></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo BASE_URL; ?>assets/images/favicon.ico">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+        <title><?php echo TITLE . ' - ' . $data['title']; ?></title>
 </head>
-
 <body>
-    <!--wrapper-->
-        <!-- Menú Bootstrap Moderno -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Bistro</a>
@@ -56,7 +48,6 @@
             </div>
         </nav>
         <div class="container mt-4">
-    <!-- Aquí continúa el contenido de la página principal -->
                             <li> <a href="<?php echo BASE_URL . 'salidas'; ?>"><i class="bx bx-right-arrow-alt"></i>Movimientos</a>
                             </li>
                         </ul>
