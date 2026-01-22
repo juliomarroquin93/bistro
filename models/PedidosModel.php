@@ -26,8 +26,10 @@ class PedidosModel extends Query{
             // Unir productos (si existe el mismo producto, sumar cantidad)
             foreach ($productosNuevos as $nuevo) {
                 $encontrado = false;
+                $claveNuevo = isset($nuevo['nombre']) ? $nuevo['nombre'] : (isset($nuevo['descripcion']) ? $nuevo['descripcion'] : '');
                 foreach ($productosPadre as &$padre) {
-                    if ($padre['descripcion'] === $nuevo['descripcion']) {
+                    $clavePadre = isset($padre['nombre']) ? $padre['nombre'] : (isset($padre['descripcion']) ? $padre['descripcion'] : '');
+                    if ($clavePadre === $claveNuevo) {
                         $padre['cantidad'] += $nuevo['cantidad'];
                         $encontrado = true;
                         break;
