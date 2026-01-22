@@ -20,13 +20,18 @@ class PedidosModel extends Query{
             $array = array($idPedidoPadre, $productos, $total, $fecha, $hora, $idUsuario);
             $idSubpedido = $this->insertar($sql, $array);
 
-            // Sumar productos al detalle del pedido original
-            // Obtener productos actuales del pedido padre
-            $sqlPadre = "SELECT productos FROM pedidos WHERE id = $idPedidoPadre ";
+            // Sumar productos al detalle del pedido original y actualizar total
+            $sqlPadre = "SELECT productos, total FROM pedidos WHERE id = $idPedidoPadre ";
             $row = $this->select($sqlPadre);
             $productosPadre = [];
-            if ($row && isset($row['productos'])) {
-                $productosPadre = json_decode($row['productos'], true);
+            $totalPadre = 0;
+            if ($row) {
+                if (isset($row['productos'])) {
+                    $productosPadre = json_decode($row['productos'], true);
+                }
+                if (isset($row['total'])) {
+                    $totalPadre = floatval($row['total']);
+                }
             }
             $productosNuevos = json_decode($productos, true);
             // Unir productos (si existe el mismo producto, sumar cantidad)
@@ -48,8 +53,9 @@ class PedidosModel extends Query{
                 }
             }
             $productosActualizados = json_encode($productosPadre);
-            $sqlUpdate = "UPDATE pedidos SET productos = ? WHERE id = ?";
-            $array = array($productosActualizados, $idPedidoPadre);
+            $nuevoTotal = $totalPadre + floatval($total);
+            $sqlUpdate = "UPDATE pedidos SET productos = ?, total = ? WHERE id = ?";
+            $array = array($productosActualizados, $nuevoTotal, $idPedidoPadre);
             $this->save($sqlUpdate, $array);
 
             return $idSubpedido;
