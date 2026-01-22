@@ -27,6 +27,8 @@ class PedidosModel extends Query{
             foreach ($productosNuevos as $nuevo) {
                 $encontrado = false;
                 $claveNuevo = isset($nuevo['nombre']) ? $nuevo['nombre'] : (isset($nuevo['descripcion']) ? $nuevo['descripcion'] : '');
+                // Asignar siempre mediaMh = '59'
+                $nuevo['mediaMh'] = '59';
                 foreach ($productosPadre as &$padre) {
                     $clavePadre = isset($padre['nombre']) ? $padre['nombre'] : (isset($padre['descripcion']) ? $padre['descripcion'] : '');
                     if ($clavePadre === $claveNuevo) {
