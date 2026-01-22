@@ -177,11 +177,19 @@ function eliminarProducto(idx) {
     renderTabla();
 }
 
+
 function mostrarBotonImprimir(idSubpedido) {
     document.getElementById('formSubpedido').remove();
     const div = document.createElement('div');
     div.className = 'd-grid mt-4';
-    div.innerHTML = `<button class="btn btn-info" onclick="window.open('index.php?url=pedidos/imprimirSubpedido&id=${idSubpedido}', '_blank')">Imprimir Subpedido</button>
+    div.innerHTML = `<button class="btn btn-info" id="btnImprimirSubpedido">Imprimir Subpedido</button>
     <a href='index.php?url=pedidos' class='btn btn-secondary mt-2'>Volver a Pedidos</a>`;
     document.querySelector('.card-body').appendChild(div);
+    document.getElementById('btnImprimirSubpedido').addEventListener('click', function() {
+        imprimirSubpedido(idSubpedido);
+    });
+}
+
+function imprimirSubpedido(idSubpedido) {
+    window.location.href = base_url + 'pedidos/imprimirSubpedido/' + idSubpedido;
 }
