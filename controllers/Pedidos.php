@@ -8,30 +8,32 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Dompdf\Dompdf;
 
 class Pedidos extends Controller
-        // Imprimir subpedido en formato ticket
-        public function imprimirSubpedido($idSubpedido)
-        {
-            ob_start();
-            $data['title'] = 'Subpedido';
-            $data['empresa'] = $this->model->getEmpresa();
-            $data['subpedido'] = $this->model->getSubpedido($idSubpedido);
-            $data['cliente'] = $this->model->getCliente($data['subpedido']['id_usuario']); // Ajustar si se requiere otro dato
-            $data['idSubpedido'] = $idSubpedido;
-            $this->views->getView('pedidos', 'tickedSubpedido', $data);
-            $html = ob_get_clean();
-            $dompdf = new Dompdf();
-            $options = $dompdf->getOptions();
-            $options->set('isJavascriptEnabled', true);
-            $options->set('isRemoteEnabled', true);
-            $dompdf->setOptions($options);
-            $dompdf->loadHtml($html);
-            $productos = json_decode($data['subpedido']['productos'], true);
-            $c = count($productos);
-            $largo = ($c*50)+500;
-            $dompdf->setPaper(array(0, 0, 150, $largo), 'portrait');
-            $dompdf->render();
-            $dompdf->stream('subpedido.pdf', array('Attachment' => false));
-        }
+{
+    // Imprimir subpedido en formato ticket
+    public function imprimirSubpedido($idSubpedido)
+    {
+        ob_start();
+        $data['title'] = 'Subpedido';
+        $data['empresa'] = $this->model->getEmpresa();
+        $data['subpedido'] = $this->model->getSubpedido($idSubpedido);
+        $data['cliente'] = $this->model->getCliente($data['subpedido']['id_usuario']); // Ajustar si se requiere otro dato
+        $data['idSubpedido'] = $idSubpedido;
+        $this->views->getView('pedidos', 'tickedSubpedido', $data);
+        $html = ob_get_clean();
+        $dompdf = new Dompdf();
+        $options = $dompdf->getOptions();
+        $options->set('isJavascriptEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $dompdf->setOptions($options);
+        $dompdf->loadHtml($html);
+        $productos = json_decode($data['subpedido']['productos'], true);
+        $c = count($productos);
+        $largo = ($c*50)+500;
+        $dompdf->setPaper(array(0, 0, 150, $largo), 'portrait');
+        $dompdf->render();
+        $dompdf->stream('subpedido.pdf', array('Attachment' => false));
+    }
+
     // Guardar subpedido como registro aparte
     public function guardarSubpedido()
     {
@@ -52,7 +54,6 @@ class Pedidos extends Controller
         }
         die();
     }
-{
     private $id_usuario;
     public function __construct()
     {
