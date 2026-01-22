@@ -117,7 +117,7 @@ function agregarProductoCatalogo(item) {
     } else {
         productosSubpedido.push({
             id: item.id,
-            descripcion: item.descripcion,
+            descripcion: item.label ? item.label : item.descripcion,
             precio: item.precio_venta,
             cantidad: 1
         });
