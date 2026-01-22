@@ -9,13 +9,7 @@ use Dompdf\Dompdf;
 
 class Pedidos extends Controller
     // Mostrar pantalla de subpedido correctamente con estructura de vistas y rutas
-    public function subpedido($idPedidoPadre)
-    {
-        $data['title'] = 'Agregar Subpedido';
-        $data['idPedidoPadre'] = $idPedidoPadre;
-        $data['script'] = '';
-        $this->views->getView('pedidos', 'subpedido', $data);
-    }
+    
 {
     // Imprimir subpedido en formato ticket
     public function imprimirSubpedido($idSubpedido)
@@ -40,6 +34,14 @@ class Pedidos extends Controller
         $dompdf->setPaper(array(0, 0, 150, $largo), 'portrait');
         $dompdf->render();
         $dompdf->stream('subpedido.pdf', array('Attachment' => false));
+    }
+
+    public function subpedido($idPedidoPadre)
+    {
+        $data['title'] = 'Agregar Subpedido';
+        $data['idPedidoPadre'] = $idPedidoPadre;
+        $data['script'] = 'subpedido.js';
+        $this->views->getView('pedidos', 'subpedido', $data);
     }
 
     // Guardar subpedido como registro aparte
