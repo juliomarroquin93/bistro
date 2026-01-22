@@ -122,9 +122,10 @@ function agregarProductoCatalogo(item) {
     } else {
         productosSubpedido.push({
             id: item.id,
-            descripcion: item.label ? item.label : item.descripcion,
-            precio: item.precio_venta,
-            cantidad: 1
+            nombre: item.label ? item.label : (item.nombre ? item.nombre : item.descripcion),
+            precio: item.precio_venta ? item.precio_venta : (item.precio ? item.precio : 0),
+            cantidad: item.cantidad ? item.cantidad : 1,
+            mediaMh: item.mediaMh ? item.mediaMh : ''
         });
     }
     renderTabla();
