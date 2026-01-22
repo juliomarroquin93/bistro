@@ -1,3 +1,13 @@
+// Redirección desde el botón de la tabla de pedidos
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.btn-subpedido').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = btn.getAttribute('data-id');
+            window.location.href = base_url + 'pedidos/subpedido/' + id;
+        });
+    });
+});
 // subpedido.js
 let productosSubpedido = [];
 
