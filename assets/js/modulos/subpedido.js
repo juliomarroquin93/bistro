@@ -181,7 +181,7 @@ function mostrarBotonImprimir(idSubpedido) {
     document.getElementById('formSubpedido').remove();
     const div = document.createElement('div');
     div.className = 'd-grid mt-4';
-    div.innerHTML = `<button class="btn btn-info" onclick="window.open('controllers/Pedidos.php?method=imprimirSubpedido&id=${idSubpedido}', '_blank')">Imprimir Subpedido</button>
+    div.innerHTML = `<button class="btn btn-info" onclick="window.open('index.php?url=pedidos/imprimirSubpedido&id=${idSubpedido}', '_blank')">Imprimir Subpedido</button>
     <a href='index.php?url=pedidos' class='btn btn-secondary mt-2'>Volver a Pedidos</a>`;
     document.querySelector('.card-body').appendChild(div);
 }

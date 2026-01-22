@@ -40,7 +40,7 @@
             foreach ($productos as $producto) { ?>
                 <tr>
                     <td><?php echo $producto['cantidad']; ?></td>
-                    <td><?php echo $producto['descripcion']; ?></td>
+                    <td><?php echo isset($producto['nombre']) ? $producto['nombre'] : (isset($producto['descripcion']) ? $producto['descripcion'] : ''); ?></td>
                 </tr>
             <?php } ?>
         </tbody>
