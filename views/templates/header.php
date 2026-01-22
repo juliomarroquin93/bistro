@@ -12,7 +12,7 @@
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Bistro</a>
+                <a class="navbar-brand" href="<?php echo BASE_URL; ?>admin">Bistro</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -21,15 +21,52 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="<?php echo BASE_URL; ?>admin">Inicio</a>
                         </li>
+                        <?php if (verificar('pedidos')) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo BASE_URL; ?>pedidos">Pedidos</a>
                         </li>
+                        <?php } ?>
+                        <?php if (verificar('clientes')) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo BASE_URL; ?>clientes">Clientes</a>
                         </li>
+                        <?php } ?>
+                        <?php if (verificar('productos')) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo BASE_URL; ?>productos">Productos</a>
                         </li>
+                        <?php } ?>
+                        <?php if (verificar('ventas')) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>ventas">Ventas</a>
+                        </li>
+                        <?php } ?>
+                        <?php if (verificar('compras')) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>ventas2">Compras</a>
+                        </li>
+                        <?php } ?>
+                        <?php if (verificar('requisiciones')) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>requisiciones">Requisiciones</a>
+                        </li>
+                        <?php } ?>
+                        <?php if (verificar('bodegas')) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>bodegas">Bodegas</a>
+                        </li>
+                        <?php } ?>
+                        <?php if (verificar('usuarios')) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>usuarios">Usuarios</a>
+                        </li>
+                        <?php } ?>
+                        <?php if (verificar('roles')) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>roles">Roles</a>
+                        </li>
+                        <?php } ?>
+                        <!-- Agrega aquí más módulos según tus permisos -->
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
