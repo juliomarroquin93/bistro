@@ -48,36 +48,6 @@
             </div>
         </nav>
         <div class="container mt-4">
-                            <li> <a href="<?php echo BASE_URL . 'salidas'; ?>"><i class="bx bx-right-arrow-alt"></i>Movimientos</a>
-                            </li>
-                        </ul>
-                    </li>
-					<?php } if (verificar('ingresos') && ! verificar('salidas') ) { ?>
-					</ul>
-                    </li>
-					<?php } if ((verificar('pedidos')) || (verificar('FacturarPedidos')) || (verificar('despacho')) ) { ?>
-                    <li>
-                        <a href="javascript:;" class="has-arrow">
-                            <div class="parent-icon"><i class="fa-regular fa-id-badge"></i>
-                            </div>
-                            <div class="menu-title">Pedidos</div>
-                        </a>
-                        <ul>
-                            <?php } if (verificar('pedidos')) { ?>
-                            <li> <a href="<?php echo BASE_URL . 'pedidos'; ?>"><i class="bx bx-right-arrow-alt"></i>Nuevo Pedido</a>
-                            </li>
-                           
-                            <?php } if (verificar('FacturarPedidos')) { ?>
-                            <li> <a href="<?php echo BASE_URL . 'pedidos/facturacion'; ?>"><i class="bx bx-right-arrow-alt"></i>Facturacion</a>
-                            </li>
-							<?php } if (verificar('despacho')) { ?>
-                            <li> <a href="<?php echo BASE_URL . 'pedidos/despacho'; ?>"><i class="bx bx-right-arrow-alt"></i>Despacho</a>
-                            </li>
-					<?php } if (verificar('pedidos') || verificar('FacturarPedidos') || verificar('despacho') ) { ?>
-					</ul>
-                    </li>
-                <?php } if (verificar('compras')) { ?>
-				
                 <li>
                     <a href="<?php echo BASE_URL . 'ventas2'; ?>">
                         <div class="parent-icon"><i class="fa-solid fa-credit-card"></i>
