@@ -131,8 +131,29 @@ function renderTabla() {
     productosSubpedido.forEach((prod, idx) => {
         const subTotal = (prod.precio * prod.cantidad).toFixed(2);
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${prod.descripcion}</td><td>${prod.precio}</td><td>${prod.cantidad}</td><td>${subTotal}</td><td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarProducto(${idx})">Eliminar</button></td>`;
+        tr.innerHTML = `
+            <td>${prod.descripcion}</td>
+            <td><input type="number" class="form-control inputPrecio" data-idx="${idx}" value="${prod.precio}" min="0" step="0.01"></td>
+            <td><input type="number" class="form-control inputCantidad" data-idx="${idx}" value="${prod.cantidad}" min="1"></td>
+            <td>${subTotal}</td>
+            <td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarProducto(${idx})">Eliminar</button></td>
+        `;
         tbody.appendChild(tr);
+    });
+    // Listeners para inputs editables
+    tbody.querySelectorAll('.inputPrecio').forEach(input => {
+        input.addEventListener('change', function() {
+            const idx = parseInt(this.getAttribute('data-idx'));
+            productosSubpedido[idx].precio = parseFloat(this.value);
+            renderTabla();
+        });
+    });
+    tbody.querySelectorAll('.inputCantidad').forEach(input => {
+        input.addEventListener('change', function() {
+            const idx = parseInt(this.getAttribute('data-idx'));
+            productosSubpedido[idx].cantidad = parseInt(this.value);
+            renderTabla();
+        });
     });
 }
 
