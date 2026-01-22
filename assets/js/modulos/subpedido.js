@@ -123,6 +123,13 @@ function agregarProductoCatalogo(item) {
         });
     }
     renderTabla();
+    // Limpiar el textbox de búsqueda automáticamente
+    if (document.getElementById('containerNombre') && !document.getElementById('containerNombre').classList.contains('d-none')) {
+        document.getElementById('buscarProductoNombre').value = '';
+    }
+    if (document.getElementById('containerCodigo') && !document.getElementById('containerCodigo').classList.contains('d-none')) {
+        document.getElementById('buscarProductoCodigo').value = '';
+    }
 }
 
 function renderTabla() {
