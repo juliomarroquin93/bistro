@@ -1,3 +1,5 @@
+let productosSubpedido = [];
+
 document.addEventListener('DOMContentLoaded', function() {
     // Alternar inputs de búsqueda
     document.getElementById('nombre').addEventListener('click', function () {
@@ -24,13 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('errorBusqueda').textContent = '';
         document.getElementById('buscarGasto').focus();
     });
-    // ...existing code...
-// Redirección desde el botón de la tabla de pedidos
-// subpedido.js
-let productosSubpedido = [];
 
-
-document.addEventListener('DOMContentLoaded', function() {
     // Autocomplete para productos por nombre
     $("#buscarProductoNombre").autocomplete({
         source: function (request, response) {
