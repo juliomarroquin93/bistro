@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Autocomplete para productos por nombre
-    $("#buscarProductoNombre").autocomplete({
+        $("#buscarProductoNombre").autocomplete({
         source: function (request, response) {
             $.ajax({
                 url: base_url + 'productos/buscarPorNombre',
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         minLength: 2,
         select: function (event, ui) {
             agregarProductoCatalogo(ui.item);
-            $('#buscarProductoNombre').val('');
+                setTimeout(function(){ $('#buscarProductoNombre').val(''); }, 50);
         }
     });
 
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('buscarGasto').addEventListener('keyup', function(e) {
         if (e.keyCode === 13) {
             agregarProductoCatalogo({ descripcion: e.target.value, precio_venta: 0, cantidad: 1, id: 0 });
-            e.target.value = '';
+                setTimeout(function(){ e.target.value = ''; }, 50);
         }
     });
 
@@ -100,7 +100,7 @@ function buscarProductoPorCodigo(codigo) {
         success: function (data) {
             if (data && data.id) {
                 agregarProductoCatalogo(data);
-                $('#buscarProductoCodigo').val('');
+                    setTimeout(function(){ $('#buscarProductoCodigo').val(''); }, 50);
                 $('#errorBusqueda').text('');
             } else {
                 $('#errorBusqueda').text('CODIGO NO EXISTE');
