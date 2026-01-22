@@ -8,6 +8,50 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Dompdf\Dompdf;
 
 class Pedidos extends Controller
+        // Imprimir subpedido en formato ticket
+        public function imprimirSubpedido($idSubpedido)
+        {
+            ob_start();
+            $data['title'] = 'Subpedido';
+            $data['empresa'] = $this->model->getEmpresa();
+            $data['subpedido'] = $this->model->getSubpedido($idSubpedido);
+            $data['cliente'] = $this->model->getCliente($data['subpedido']['id_usuario']); // Ajustar si se requiere otro dato
+            $data['idSubpedido'] = $idSubpedido;
+            $this->views->getView('pedidos', 'tickedSubpedido', $data);
+            $html = ob_get_clean();
+            $dompdf = new Dompdf();
+            $options = $dompdf->getOptions();
+            $options->set('isJavascriptEnabled', true);
+            $options->set('isRemoteEnabled', true);
+            $dompdf->setOptions($options);
+            $dompdf->loadHtml($html);
+            $productos = json_decode($data['subpedido']['productos'], true);
+            $c = count($productos);
+            $largo = ($c*50)+500;
+            $dompdf->setPaper(array(0, 0, 150, $largo), 'portrait');
+            $dompdf->render();
+            $dompdf->stream('subpedido.pdf', array('Attachment' => false));
+        }
+    // Guardar subpedido como registro aparte
+    public function guardarSubpedido()
+    {
+        $json = file_get_contents('php://input');
+        $datos = json_decode($json, true);
+        $idPedidoPadre = $datos['idPedidoPadre'];
+        $productos = json_encode($datos['productos']);
+        $total = $datos['total'];
+        $fecha = date('Y-m-d');
+        $hora = date('H:i:s');
+        $idUsuario = $this->id_usuario;
+        // Puedes agregar más campos según necesidad
+        $res = $this->model->guardarSubpedido($idPedidoPadre, $productos, $total, $fecha, $hora, $idUsuario);
+        if ($res > 0) {
+            echo json_encode(['msg' => 'Subpedido guardado', 'type' => 'success', 'idSubpedido' => $res]);
+        } else {
+            echo json_encode(['msg' => 'Error al guardar subpedido', 'type' => 'error']);
+        }
+        die();
+    }
 {
     private $id_usuario;
     public function __construct()
@@ -238,11 +282,12 @@ $this->views->getView('ventas', 'exportacion', $data);
                 <a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
                 </div>';
 				}else{
-				 $data[$i]['acciones'] = '<div>
-                <a class="btn btn-warning" href="#" onclick="anularPedido(' . $data[$i]['id'] . ')"><i class="fas fa-trash"></i></a>
-                <a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
-                <a class="btn btn-warning" href="#" onclick="detalle(' . $data[$i]['id'] . ')"><i class="fas fa-file-edit"></i></a>
-                </div>';	
+                   $data[$i]['acciones'] = '<div>
+                    <a class="btn btn-warning" href="#" onclick="anularPedido(' . $data[$i]['id'] . ')"><i class="fas fa-trash"></i></a>
+                    <a class="btn btn-danger" href="#" onclick="verReporte(' . $data[$i]['id'] . ')"><i class="fas fa-file-pdf"></i></a>
+                    <a class="btn btn-warning" href="#" onclick="detalle(' . $data[$i]['id'] . ')"><i class="fas fa-file-edit"></i></a>
+                    <a class="btn btn-info" href="views/pedidos/subpedido.php?idPedidoPadre=' . $data[$i]['id'] . '" title="Agregar Subpedido"><i class="fas fa-plus"></i> Subpedido</a>
+                    </div>';  
 				}
             } else {
                 $data[$i]['acciones'] = '<div>

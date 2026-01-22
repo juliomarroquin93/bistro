@@ -1,5 +1,48 @@
 <?php
 class PedidosModel extends Query{
+            // Obtener subpedido por id
+            public function getSubpedido($idSubpedido)
+            {
+                $sql = "SELECT * FROM subpedidos WHERE id = ?";
+                return $this->select($sql, [$idSubpedido]);
+            }
+        // Guardar subpedido como registro aparte
+        public function guardarSubpedido($idPedidoPadre, $productos, $total, $fecha, $hora, $idUsuario)
+        {
+            // Guardar subpedido
+            $sql = "INSERT INTO subpedidos (id_pedido_padre, productos, total, fecha, hora, id_usuario) VALUES (?, ?, ?, ?, ?, ?)";
+            $array = array($idPedidoPadre, $productos, $total, $fecha, $hora, $idUsuario);
+            $idSubpedido = $this->insertar($sql, $array);
+
+            // Sumar productos al detalle del pedido original
+            // Obtener productos actuales del pedido padre
+            $sqlPadre = "SELECT productos FROM pedidos WHERE id = ?";
+            $row = $this->select($sqlPadre, [$idPedidoPadre]);
+            $productosPadre = [];
+            if ($row && isset($row['productos'])) {
+                $productosPadre = json_decode($row['productos'], true);
+            }
+            $productosNuevos = json_decode($productos, true);
+            // Unir productos (si existe el mismo producto, sumar cantidad)
+            foreach ($productosNuevos as $nuevo) {
+                $encontrado = false;
+                foreach ($productosPadre as &$padre) {
+                    if ($padre['descripcion'] === $nuevo['descripcion']) {
+                        $padre['cantidad'] += $nuevo['cantidad'];
+                        $encontrado = true;
+                        break;
+                    }
+                }
+                if (!$encontrado) {
+                    $productosPadre[] = $nuevo;
+                }
+            }
+            $productosActualizados = json_encode($productosPadre);
+            $sqlUpdate = "UPDATE pedidos SET productos = ? WHERE id = ?";
+            $this->save($sqlUpdate, [$productosActualizados, $idPedidoPadre]);
+
+            return $idSubpedido;
+        }
     public function __construct() {
         parent::__construct();
     }
