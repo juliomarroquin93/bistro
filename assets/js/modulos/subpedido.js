@@ -2,15 +2,44 @@
 // subpedido.js
 let productosSubpedido = [];
 
+
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('agregarProducto').addEventListener('click', function() {
-        const producto = document.getElementById('producto').value.trim();
-        const cantidad = parseInt(document.getElementById('cantidad').value);
-        if (producto && cantidad > 0) {
-            productosSubpedido.push({ descripcion: producto, cantidad: cantidad });
-            renderTabla();
-            document.getElementById('producto').value = '';
-            document.getElementById('cantidad').value = 1;
+    // Autocomplete para productos por nombre
+    $("#buscarProductoNombre").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: base_url + 'productos/buscarPorNombre',
+                dataType: "json",
+                data: { term: request.term },
+                success: function (data) {
+                    response(data);
+                    if (data.length === 0) {
+                        $('#errorBusqueda').text('NO HAY PRODUCTO CON ESE NOMBRE');
+                    } else {
+                        $('#errorBusqueda').text('');
+                    }
+                }
+            });
+        },
+        minLength: 2,
+        select: function (event, ui) {
+            agregarProductoCatalogo(ui.item);
+            $('#buscarProductoNombre').val('');
+        }
+    });
+
+    // Buscar por código de barras
+    document.getElementById('buscarProductoCodigo').addEventListener('keyup', function(e) {
+        if (e.keyCode === 13) {
+            buscarProductoPorCodigo(e.target.value);
+        }
+    });
+
+    // Agregar gasto/servicio
+    document.getElementById('buscarGasto').addEventListener('keyup', function(e) {
+        if (e.keyCode === 13) {
+            agregarProductoCatalogo({ descripcion: e.target.value, precio_venta: 0, cantidad: 1, id: 0 });
+            e.target.value = '';
         }
     });
 
@@ -21,8 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Agrega al menos un producto');
             return;
         }
-        // Aquí podrías calcular el total si tienes precios
-        const total = 0;
+        const total = productosSubpedido.reduce((acc, prod) => acc + (prod.precio * prod.cantidad), 0);
         fetch('controllers/Pedidos.php?method=guardarSubpedido', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -41,12 +69,46 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+function buscarProductoPorCodigo(codigo) {
+    $.ajax({
+        url: base_url + 'productos/buscarPorCodigo',
+        dataType: "json",
+        data: { term: codigo },
+        success: function (data) {
+            if (data && data.id) {
+                agregarProductoCatalogo(data);
+                $('#buscarProductoCodigo').val('');
+                $('#errorBusqueda').text('');
+            } else {
+                $('#errorBusqueda').text('CODIGO NO EXISTE');
+            }
+        }
+    });
+}
+
+function agregarProductoCatalogo(item) {
+    // Si ya existe, suma cantidad
+    const idx = productosSubpedido.findIndex(p => p.id === item.id);
+    if (idx !== -1) {
+        productosSubpedido[idx].cantidad += 1;
+    } else {
+        productosSubpedido.push({
+            id: item.id,
+            descripcion: item.descripcion,
+            precio: item.precio_venta,
+            cantidad: 1
+        });
+    }
+    renderTabla();
+}
+
 function renderTabla() {
     const tbody = document.querySelector('#tablaSubpedido tbody');
     tbody.innerHTML = '';
     productosSubpedido.forEach((prod, idx) => {
+        const subTotal = (prod.precio * prod.cantidad).toFixed(2);
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${prod.descripcion}</td><td>${prod.cantidad}</td><td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarProducto(${idx})">Eliminar</button></td>`;
+        tr.innerHTML = `<td>${prod.descripcion}</td><td>${prod.precio}</td><td>${prod.cantidad}</td><td>${subTotal}</td><td><button type="button" class="btn btn-danger btn-sm" onclick="eliminarProducto(${idx})">Eliminar</button></td>`;
         tbody.appendChild(tr);
     });
 }

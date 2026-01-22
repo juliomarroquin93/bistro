@@ -4,25 +4,47 @@
     <div class="card-body">
         <h5 class="card-title text-center"><i class="fas fa-plus"></i> Agregar Subpedido</h5>
         <hr>
-        <div class="row mb-2 justify-content-center">
-            <div class="col-md-4">
-                <label for="producto" class="form-label">Producto</label>
-                <input type="text" class="form-control" id="producto" name="producto" placeholder="Buscar producto">
-            </div>
-            <div class="col-md-2">
-                <label for="cantidad" class="form-label">Cantidad</label>
-                <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" value="1">
-            </div>
-            <div class="col-md-2 d-flex align-items-end">
-                <button type="button" class="btn btn-success w-100" id="agregarProducto">Agregar Producto</button>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+                    <label class="btn btn-primary">
+                        <input type="radio" id="barcode" checked name="buscarProducto"><i class="fas fa-barcode"></i> Barcode
+                    </label>
+                    <label class="btn btn-info">
+                        <input type="radio" id="nombre" name="buscarProducto"><i class="fas fa-list"></i> Nombre
+                    </label>
+                    <div class="btn-group-toggle float-end" data-toggle="buttons">
+                        <label class="btn btn-warning">
+                            <input type="checkbox" id="chekExento"> Exento
+                        </label>
+                        <label class="btn btn-success">
+                            <input type="radio" id="gasto" name="buscarProducto"><i class="fas fa-list"></i> Servicio
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="input-group mb-2" id="containerCodigo">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input class="form-control" type="text" id="buscarProductoCodigo" placeholder="Ingrese Barcode - Enter" autocomplete="off">
+        </div>
+        <div class="input-group d-none mb-2" id="containerNombre">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input class="form-control" type="text" id="buscarProductoNombre" placeholder="Buscar Producto" autocomplete="off">
+        </div>
+        <div class="input-group d-none mb-2" id="containerGasto">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input class="form-control" type="text" id="buscarGasto" placeholder="Ingresar gasto" autocomplete="off">
+        </div>
+        <span class="text-danger fw-bold mb-2" id="errorBusqueda"></span>
         <div class="table-responsive mb-3">
             <table class="table table-bordered table-striped table-hover align-middle" id="tablaSubpedido" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>Producto</th>
+                        <th>Precio</th>
                         <th>Cantidad</th>
+                        <th>SubTotal</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
