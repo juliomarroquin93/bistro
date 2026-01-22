@@ -144,8 +144,10 @@ function renderTabla() {
     productosSubpedido.forEach((prod, idx) => {
         const subTotal = (prod.precio * prod.cantidad).toFixed(2);
         const tr = document.createElement('tr');
+        // Mostrar el nombre si existe, si no la descripcion
+        const nombreProducto = prod.nombre ? prod.nombre : (prod.descripcion ? prod.descripcion : '');
         tr.innerHTML = `
-            <td>${prod.descripcion}</td>
+            <td>${nombreProducto}</td>
             <td><input type="number" class="form-control inputPrecio" data-idx="${idx}" value="${prod.precio}" min="0" step="0.01"></td>
             <td><input type="number" class="form-control inputCantidad" data-idx="${idx}" value="${prod.cantidad}" min="1"></td>
             <td>${subTotal}</td>
