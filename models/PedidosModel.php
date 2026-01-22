@@ -1,5 +1,11 @@
 <?php
 class PedidosModel extends Query{
+                // Obtener usuario por id
+                public function getUsuario($idUsuario)
+                {
+                    $sql = "SELECT * FROM usuarios WHERE id = $idUsuario";
+                    return $this->select($sql);
+                }
             // Obtener subpedido por id
             public function getSubpedido($idSubpedido)
             {

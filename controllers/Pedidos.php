@@ -22,7 +22,13 @@ class Pedidos extends Controller
         $idPedidoPadre = $data['subpedido']['id_pedido_padre'];
         $pedidoPadre = $this->model->getCotizacion($idPedidoPadre); // getCotizacion trae el pedido por id
         $idCliente = isset($pedidoPadre['id_cliente']) ? $pedidoPadre['id_cliente'] : null;
-        $data['cliente'] = $idCliente ? $this->model->getCliente($idCliente) : null;
+        $cliente = $idCliente ? $this->model->getCliente($idCliente) : null;
+        $data['cliente'] = $cliente;
+        // Obtener nombre del usuario que hizo el subpedido
+        $idUsuario = $data['subpedido']['id_usuario'];
+        $usuario = $this->model->getUsuario($idUsuario); // Debe existir este método en el modelo
+        $data['usuario_subpedido'] = $usuario ? $usuario['nombre'] : '';
+        $data['nombre_cliente'] = $cliente ? $cliente['nombre'] : '';
         $data['idSubpedido'] = $idSubpedido;
         $this->views->getView('pedidos', 'tickedSubpedido', $data);
         $html = ob_get_clean();

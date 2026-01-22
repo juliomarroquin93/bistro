@@ -17,7 +17,8 @@
     </div>
     <h5 class="title">Datos del Usuario</h5>
     <div class="datos-info">
-        <p><strong>ID Usuario: </strong> <?php echo $data['subpedido']['id_usuario']; ?></p>
+        <p><strong>Usuario que hizo el subpedido: </strong> <?php echo $data['usuario_subpedido']; ?></p>
+        <p><strong>Cliente: </strong> <?php echo $data['nombre_cliente']; ?></p>
     </div>
     <h5 class="title">Comprobante de Subpedido</h5>
     <div class="datos-factu"> 
