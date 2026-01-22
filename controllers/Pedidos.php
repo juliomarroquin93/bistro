@@ -8,6 +8,14 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Dompdf\Dompdf;
 
 class Pedidos extends Controller
+    // Mostrar pantalla de subpedido correctamente con estructura de vistas y rutas
+    public function subpedido($idPedidoPadre)
+    {
+        $data['title'] = 'Agregar Subpedido';
+        $data['idPedidoPadre'] = $idPedidoPadre;
+        $data['script'] = '';
+        $this->views->getView('pedidos', 'subpedido', $data);
+    }
 {
     // Imprimir subpedido en formato ticket
     public function imprimirSubpedido($idSubpedido)
