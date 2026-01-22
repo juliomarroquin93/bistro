@@ -1,5 +1,5 @@
 
-<?php include_once '../templates/header.php'; ?>
+<?php include_once 'views/templates/header.php'; ?>
 
 <div class="card">
     <div class="card-body">
@@ -108,4 +108,4 @@ function mostrarBotonImprimir(idSubpedido) {
 </script>
 </script>
 
-<?php include_once '../templates/footer.php'; ?>
+<?php include_once 'views/templates/footer.php'; ?>
