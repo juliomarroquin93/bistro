@@ -125,13 +125,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		 mostrarProducto();
 
 		  })
-
-		  function subpedido(id) {	
-
- window.location.href = base_url + 'pedidos/subpedido/' + id;
- 
-		  }
-		 
 		  
 		   docuemi.addEventListener('click', function () {
 		if(docuemi.value == "FACTURA"){	   
@@ -370,6 +363,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 })
+
+function subpedido(id){
+	 window.location.href = base_url + 'pedidos/subpedido/' + id;
+}
 
 function generarPlan(){
 var table = document.getElementById("tblPlan");
