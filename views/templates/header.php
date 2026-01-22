@@ -17,86 +17,45 @@
 
 <body>
     <!--wrapper-->
-    <div class="wrapper">
-        <!--sidebar wrapper -->
-        <div class="sidebar-wrapper" data-simplebar="true">
-            <div class="sidebar-header">
-                <div>
-                    <img src="<?php echo BASE_URL; ?>assets/images/logo.png" class="logo-icon" alt="logo icon">
-                </div>
-                <div>
-                    <h4 class="logo-text">POSTWO</h4>
-                </div>
-                <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
+        <!-- Menú Bootstrap Moderno -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Bistro</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?php echo BASE_URL; ?>admin">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>pedidos">Pedidos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>clientes">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo BASE_URL; ?>productos">Productos</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="<?php echo isset($_SESSION['perfil_usuario']) && $_SESSION['perfil_usuario'] ? BASE_URL . $_SESSION['perfil_usuario'] : BASE_URL . 'assets/images/logo.png'; ?>" class="rounded-circle" width="30" height="30" alt="user avatar">
+                                <?php echo $_SESSION['nombre_usuario']; ?>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL . 'usuarios/profile'; ?>">Perfil</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL . 'usuarios/salir'; ?>">Salir</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <!--navigation-->
-            <ul class="metismenu" id="menu">
-
-
-
-                <li>
-                    <a href="<?php echo BASE_URL . 'admin'; ?>">
-                        <div class="parent-icon"><i class="fa-solid fa-house-user"></i>
-                        </div>
-                        <div class="menu-title">Tablero</div>
-                    </a>
-                </li>
-
-
-
-                <?php if (verificar('configuracion') || verificar('usuario') || verificar('roles') || verificar('log de acceso') || verificar('puntoVentas')) { ?>
-                    <li>
-                        <a href="javascript:;" class="has-arrow">
-                            <div class="parent-icon"><i class="fa-solid fa-screwdriver-wrench"></i>
-                            </div>
-                            <div class="menu-title">Administracion</div>
-                        </a>
-                        <ul>
-                            <?php } if (verificar('usuarios')) { ?>
-                            <li> <a href="<?php echo BASE_URL . 'usuarios'; ?>"><i class="bx bx-right-arrow-alt"></i>Usuarios</a>
-                            </li>
-                           
-                            <?php } if (verificar('roles')) { ?>
-                            <li> <a href="<?php echo BASE_URL . 'roles'; ?>"><i class="bx bx-right-arrow-alt"></i>Roles</a>
-                            </li>
-
-                            <?php } if (verificar('configuracion')) { ?>
-                            <li> <a href="<?php echo BASE_URL . 'admin/datos'; ?>"><i class="bx bx-right-arrow-alt"></i>Configuracion</a>
-                            </li>
-                            
-                            <?php } if (verificar('log de acceso')) { ?>
-                            <li> <a href="<?php echo BASE_URL . 'admin/logs'; ?>"><i class="bx bx-right-arrow-alt"></i>Log de Acceso</a>
-                            </li>
-							
-                            <?php } if (verificar('puntoVentas')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'puntoVentas'; ?>"><i class="bx bx-right-arrow-alt"></i>Punto de Ventas</a>
-                        </li>
-						<?php } if (verificar('configuracion') || verificar('usuario') || verificar('roles') || verificar('log de acceso') || verificar('puntoVentas')) { ?>
-                    </ul>
-                </li>
-                <?php } ?>
-                
-                
-                <!--DESDE AQUI PUSE EL CODIGO DE NUEVO SI ES NECESARIO QUITARLO LO QUITAS PARA NO INTERFERIR CON TU PROGRAMACION SI ESTA BIEN DEJARLO-->
-                <?php if (verificar('tasaMora') || verificar('medidas') || verificar('categorias') || verificar('productos') || verificar('bodegas')|| verificar('contingencias')) { ?>
-                 <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="fa-solid fa-clipboard-list"></i>
-                        </div>
-                        <div class="menu-title">Mantenimiento</div>
-                    </a>
-                    <ul>
-                    <?php } if (verificar('tasaMora')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'tasaMora'; ?>"><i class="bx bx-right-arrow-alt"></i>Interes por mora</a>
-                        </li>
-                        <?php } if (verificar('medidas')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'medidas'; ?>"><i class="bx bx-right-arrow-alt"></i>Medidas</a>
-                        </li>
-                        <?php } if (verificar('categorias')) { ?>
-                        <li> <a href="<?php echo BASE_URL . 'categorias'; ?>"><i class="bx bx-right-arrow-alt"></i>Categorias</a>
-                        </li>
-                        <?php } if (verificar('productos')) { ?>
+        </nav>
+        <div class="container mt-4">
                         <li> <a href="<?php echo BASE_URL . 'productos'; ?>"><i class="bx bx-right-arrow-alt"></i>Productos</a>
                         </li>
 						<?php } if (verificar('bodegas')) { ?>
