@@ -32,8 +32,8 @@
      <div class="datos-factu"> 
      <p><strong>Fecha: </strong> <?php echo $data['venta']['fecha']; ?></p>
      <p><strong>Hora: </strong> <?php echo $data['venta']['hora']; ?></p>
-     <p><strong>Tipo Documento: </strong> <?php echo $data['venta']['docuemi']; ?></p>
-     <p><strong><?php echo $data['venta']['forma']; ?>: </strong> <?php echo $data['venta']['metodo']; ?></p>
+    <p><strong>Mesa: </strong> <?php echo $data['venta']['mesas']; ?></p>
+    <p><strong>Observaciones: </strong> <?php echo $data['venta']['observaciones']; ?></p>
      <p><strong>Numero de Pedido: </strong> <?php echo $data['idVenta']; ?></p>
      
         
