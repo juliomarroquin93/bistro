@@ -191,5 +191,6 @@ function mostrarBotonImprimir(idSubpedido) {
 }
 
 function imprimirSubpedido(idSubpedido) {
-    window.location.href = base_url + 'pedidos/imprimirSubpedido/' + idSubpedido;
+    const ruta = base_url + 'pedidos/imprimirSubpedido/' + idSubpedido;
+    window.open(ruta, '_blank');
 }
