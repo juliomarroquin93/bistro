@@ -1989,7 +1989,7 @@ function guardarDte(objdte,correlativo){
                             }).then((result) => {
                                 /* Read more about isConfirmed, isDenied below */
                                 if (result.isConfirmed) {
-                                    const ruta = base_url + 'ventas/reporte/ticked/' + res.idVenta;
+                                    const ruta = base_url + 'pedidos/reporte/ticked/' + res.idVenta;
                                     window.open(ruta, '_blank');
                                 } else if (result.isDenied) {
                                      const ruta = base_url + 'pedidos/reporte/pdf/' + res.idVenta;
