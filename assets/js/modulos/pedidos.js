@@ -1961,7 +1961,7 @@ function guardarDte(objdte,correlativo){
 				tipoVen : tipo_ingreso.value,
 				obser: observaciones ? observaciones.value : "",
 				id : idPedido.value,
-				mesas: mesas ? mesas.value : ""
+				mesas: mesas.value ? mesas.value : ""
 
 
 				
