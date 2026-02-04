@@ -58,10 +58,8 @@
                     <div class="col-md-2">
                         <label for="docuemi">Documentos</label>
                         <select id="docuemi" class="form-control">
-                            <option value="CREDITO FISCAL">CREDITO FISCAL</option>
                             <option value="FACTURA">FACTURA</option>
-							 <option value="EXPORTACION">EXPORTACION</option>
-                             <option value="NOTA DE REMISION">NOTA DE REMISION</option>
+                            <option value="CREDITO FISCAL">CREDITO FISCAL</option>
                         </select>
                     </div>
 
@@ -112,6 +110,21 @@
                                <option value="03">03 Consignación</option>
                                <option value="04">04 Traslado</option>
                                <option value="05">05 Otros</option>
+                           </select>
+                            </div>
+                       </div>
+
+                       <div class="col-lg-4 col-sm-6 mb-2">
+                           <label for="mesas">Mesas</label>
+                           <div class="input-group">
+                           <label class="input-group-text" for="mesas"><i class="fas fa-id-card"></i></label>
+                           <select id="mesas" class="form-control">
+                               <option value="Mesa 1">Mesa 1</option>
+                               <option value="Mesa 2">Mesa 2</option>
+                               <option value="Mesa 3">Mesa 3</option>
+                               <option value="Mesa 4">Mesa 4</option>
+                               <option value="Mesa 5">Mesa 5</option>
+                               <option value="Llevar">Llevar</option>
                            </select>
                             </div>
                        </div>

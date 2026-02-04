@@ -1928,17 +1928,17 @@ function guardarDte(objdte,correlativo){
             http.open('POST', url, true);
             //Enviar Datos
             http.send(JSON.stringify({
-                productos: listaCarrito,
-                idCliente: idCliente.value,
-                forma: formaPago.options[formaPago.selectedIndex].text,
-                forma2: forma2.value,
-                docuemi: docuemi.value,
-                numdocu: numdocu.value,
-                vende: vende.value,
-                metodo: metodo.value,
-                descuento: descuento.value,
-                pago: pagar_con.value,
-                impresion: impresion_directa.checked,
+				productos: listaCarrito,
+				idCliente: idCliente.value,
+				forma: formaPago.options[formaPago.selectedIndex].text,
+				forma2: forma2.value,
+				docuemi: docuemi.value,
+				numdocu: numdocu.value,
+				vende: vende.value,
+				metodo: metodo.value,
+				descuento: descuento.value,
+				pago: pagar_con.value,
+				impresion: impresion_directa.checked,
 				correlativo: correlativo[0].correlativo != "" && correlativo[0].correlativo != null ?  parseInt(correlativo[0].correlativo) +1 : 1,
 				numeroControlDte : '',
 				dte: JSON.stringify(objdte),
@@ -1958,9 +1958,10 @@ function guardarDte(objdte,correlativo){
 				planPagoDetalle : JSON.stringify(planPago),
 				montoTotalPlan : montoTotal,
 				tipoOp : tipo_operacion.value,
-	            tipoVen : tipo_ingreso.value,
+				tipoVen : tipo_ingreso.value,
 				obser: observaciones ? observaciones.value : "",
 				id : idPedido.value,
+				mesas: mesas ? mesas.value : ""
 
 
 				

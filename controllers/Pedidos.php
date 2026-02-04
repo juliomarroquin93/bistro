@@ -147,23 +147,24 @@ class Pedidos extends Controller
             $vende = $datos['vende'];
             $forma = $datos['forma'];
             $forma2 = $datos['forma2'];
-			$correlativo = $datos['correlativo'];
-			$numeroControlDte = $datos['numeroControlDte'];
-			$dte = $datos['dte'];
-			$uuid = $datos['uuid'];
-			$tipoTransmision = $datos['tipoTransmision'];
-			$totalVenta = $datos['total'];
-			$codPuntoVentaMH = $datos['codPuntoVentaMH'];
-			$sello = $datos['sello'];
-			$vExentas = $datos['vExentas'];
-			$vIva = $datos['vIva'];
-			$vGravadas = $datos['vGravadas'];
-			$claseDoc = 4;
-			$retenIva = $datos['retenIva'];
-			$tipo_operacion = $datos['tipoOp'];
-	        $tipo_ingreso = $datos['tipoVen'];
+            $correlativo = $datos['correlativo'];
+            $numeroControlDte = $datos['numeroControlDte'];
+            $dte = $datos['dte'];
+            $uuid = $datos['uuid'];
+            $tipoTransmision = $datos['tipoTransmision'];
+            $totalVenta = $datos['total'];
+            $codPuntoVentaMH = $datos['codPuntoVentaMH'];
+            $sello = $datos['sello'];
+            $vExentas = $datos['vExentas'];
+            $vIva = $datos['vIva'];
+            $vGravadas = $datos['vGravadas'];
+            $claseDoc = 4;
+            $retenIva = $datos['retenIva'];
+            $tipo_operacion = $datos['tipoOp'];
+            $tipo_ingreso = $datos['tipoVen'];
             $observaciones = $datos['obser'];
             $id = $datos['id'];
+            $mesas = isset($datos['mesas']) ? $datos['mesas'] : null;
 
 			
 
@@ -197,7 +198,7 @@ class Pedidos extends Controller
 
                     if($id==""){
 				//$venta = $this->model->registrarCotizacion($datosProductos, $vTotal, $fecha, $hora, $metodo, $validez, $descuento, $idCliente, $documento, $vGravadas, $vIva, $vIvaRete);	
-                $venta = $this->model->registrarVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones);
+                $venta = $this->model->registrarVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso, $estadoPedido, $observaciones, $mesas);
 				}else{
 				$venta = $this->model->updateVenta($datosProductos, $totalVenta, $fecha, $hora, $metodo, $descuento, $serie[0], $pago, $docuemi, $numdocu, $vende, $forma, $forma2, $idCliente, $this->id_usuario, $correlativo, $numeroControlDte, $uuid, $codPuntoVentaMH, $sello, $vExentas, $vIva, $vGravadas, $claseDoc, $retenIva, $tipo_operacion, $tipo_ingreso,$estadoPedido,$observaciones,$id);
 				$venta = $id;
