@@ -531,6 +531,7 @@ listaCarrito = [];
 			contribuyente = res.contribuyente;
 			observaciones.value = res.observaciones;
 			vende.value = res.vende;
+			mesas.value = res.mesas;
             for (i=0; i<productos.length; i++){
 				
 		listaCarrito.push({
