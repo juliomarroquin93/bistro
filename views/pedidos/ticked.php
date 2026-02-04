@@ -19,21 +19,13 @@
 <br><br>
         
     </div>
-    <h5 class="title">Datos del Cliente</h5>
-    <div class="datos-info">
-        
-        <p><strong>Nombre: </strong> <?php echo $data['venta']['nombre']; ?></p>
-        <p><strong>Telefono: </strong> <?php echo $data['venta']['telefono']; ?></p>
-        <p><strong>Direccion: </strong> <?php echo $data['venta']['direccion']; ?></p>
-        <p><strong>Correo: </strong> <?php echo $data['venta']['correo']; ?></p>
-    </div>
     
     <h5 class="title">Comprobante de Pedido</h5>
      <div class="datos-factu"> 
      <p><strong>Fecha: </strong> <?php echo $data['venta']['fecha']; ?></p>
      <p><strong>Hora: </strong> <?php echo $data['venta']['hora']; ?></p>
     <p><strong>Mesa: </strong> <?php echo $data['venta']['mesas']; ?></p>
-    <p><strong>Observaciones: </strong> <?php echo $data['venta']['observaciones']; ?></p>
+    <p><strong>Cliente: </strong> <?php echo $data['venta']['observaciones']; ?></p>
      <p><strong>Numero de Pedido: </strong> <?php echo $data['idVenta']; ?></p>
      
         
