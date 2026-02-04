@@ -141,15 +141,7 @@ class Productos extends Controller
             } else if (!empty($fotoActual) && empty($name)) {
                 $destino = $fotoActual;
             }
-            if (empty($codigo)) {
-                $res = array('msg' => 'EL CODIGO ES REQUERIDO', 'type' => 'warning');
-
-            }
-            if (empty($ubi)) {
-                $res = array('msg' => 'UBICACION ES REQUERIDO', 'type' => 'warning');
-
-
-            } else if (empty($nombre)) {
+            if (empty($nombre)) {
                 $res = array('msg' => 'EL NOMBRE ES REQUERIDO', 'type' => 'warning');
           
             } else if (empty($id_medida)) {
