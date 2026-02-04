@@ -24,6 +24,7 @@ class Pedidos extends Controller
         $idCliente = isset($pedidoPadre['id_cliente']) ? $pedidoPadre['id_cliente'] : null;
         $cliente = $idCliente ? $this->model->getCliente($idCliente) : null;
         $data['cliente'] = $cliente;
+        $data['venta'] = $this->model->getVenta($data['subpedido']['id_pedido_padre'];);
         // Obtener nombre del usuario que hizo el subpedido
         $idUsuario = $data['subpedido']['id_usuario'];
         $usuario = $this->model->getUsuario($idUsuario); // Debe existir este método en el modelo

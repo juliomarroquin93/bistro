@@ -18,12 +18,13 @@
     <h5 class="title">Datos del Usuario</h5>
     <div class="datos-info">
         <p><strong>Usuario que hizo el subpedido: </strong> <?php echo $data['usuario_subpedido']; ?></p>
-        <p><strong>Cliente: </strong> <?php echo $data['nombre_cliente']; ?></p>
     </div>
     <h5 class="title">Comprobante de Subpedido</h5>
     <div class="datos-factu"> 
         <p><strong>Fecha: </strong> <?php echo $data['subpedido']['fecha']; ?></p>
         <p><strong>Hora: </strong> <?php echo $data['subpedido']['hora']; ?></p>
+         <p><strong>Mesa: </strong> <?php echo $data['venta']['mesas']; ?></p>
+         <p><strong>Cliente: </strong> <?php echo $data['venta']['observaciones']; ?></p>
         <p><strong>ID Pedido Padre: </strong> <?php echo $data['subpedido']['id_pedido_padre']; ?></p>
         <p><strong>ID Subpedido: </strong> <?php echo $data['idSubpedido']; ?></p>
     </div>
