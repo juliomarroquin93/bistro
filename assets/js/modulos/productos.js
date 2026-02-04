@@ -85,15 +85,7 @@ document.addEventListener('DOMContentLoaded', function(){
     formulario.addEventListener('submit', function(e){
         e.preventDefault();
         limpiarCampos();
-        if (codigo.value == '') {
-            errorCodigo.textContent = 'EL CODIGO ES REQUERIDO';
-
-
-        } else if (ubi.value == '') {
-            errorUbi.textContent = 'LA UBICACION ES REQUERIDO';
-
-
-        } else if (nombre.value == '') {
+       if (nombre.value == '') {
             errorNombre.textContent = 'EL NOMBRE ES REQUERIDO';
             
         
